@@ -6,7 +6,7 @@ import logging
 app = Flask(__name__)
 
 
-
+#apis=[r"https://inv.vern.cc/", r"https://inv.nadeko.net/", r"https://iv.melmac.space/", r"https://youtube.privacyplz.org/"]
 
 logging.basicConfig(level=logging.DEBUG)
 
