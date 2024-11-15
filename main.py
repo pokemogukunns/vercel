@@ -3,6 +3,12 @@ import requests
 
 app = Flask(__name__)
 
+
+
+
+logging.basicConfig(level=logging.DEBUG)
+
+
 @app.route('/video/<video_id>')
 def video(video_id):
     # Invidious APIから動画情報を取得
