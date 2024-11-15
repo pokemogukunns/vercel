@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG)
 @app.route('/videos/<video_id>')
 def video(video_id):
     # Invidious APIから動画情報を取得
-    api_url = f"https://youtube.privacyplz.org/api/v1/videos/{video_id}"
+    api_url = f"https://inv.nadeko.net/api/v1/videos/{video_id}"
     response = requests.get(api_url)
     video_info = response.json()
 
