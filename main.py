@@ -11,7 +11,7 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
-@app.route('/watch?v=<video_id>')
+@app.route('/videos/<video_id>')
 def video(video_id):
     # Invidious APIから動画情報を取得
     api_url = f"https://youtube.privacyplz.org/api/v1/videos/{video_id}"
