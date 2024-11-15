@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video</title>
+</head>
+<body>
+    <h1>Video Player</h1>
+    <video controls width="640" height="360">
+        <source src="{{ last_url }}" type="video/mp4">
+        お使いのブラウザは動画タグに対応していません。
+    </video>
+  <br><br><br><br><br><br><br><br><br><br>
+  <a href="{{ last_url }}">動画のダウンロード</a>
+  <audio>
+    <source src="{{ first_url }}" type="video/mp4">
+  </audio>
+  <a href="{{ first_url }}">音声のダウンロード</a>
+</body>
+</html>
