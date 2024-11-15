@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 import requests
+import logging
+
 
 app = Flask(__name__)
 
