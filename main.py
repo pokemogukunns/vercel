@@ -1,25 +1,28 @@
+from flask import Flask, render_template
 import requests
 
-# 動画ID（YouTubeの動画IDを指定）
-video_id = "dQw4w9WgXcQ"
+app = Flask(__name__)
 
-# invidious APIのエンドポイント
-api_url = f"https://inv.nadeko.net/api/v1/videos/{video_id}"
+@app.route('/video/<video_id>')
+def video(video_id):
+    # Invidious APIから動画情報を取得
+    api_url = f"https://inv.nadeko.net/api/v1/videos/{video_id}"
+    response = requests.get(api_url)
+    video_info = response.json()
 
-# APIリクエストを送信
-response = requests.get(api_url)
-video_info = response.json()
+    # googlevideo.comのリンクをリストから取得
+    google_video_urls = [stream['url'] for stream in video_info['streams'] if 'googlevideo.com' in stream['url']]
+    
+    # 最初と最後のURLを取得
+    if google_video_urls:
+        first_url = google_video_urls[0]
+        last_url = google_video_urls[-1]
+    else:
+        first_url = last_url = ""
 
-# googlevideo.com のリンクをリストから取得
-google_video_urls = [stream['url'] for stream in video_info['streams'] if 'googlevideo.com' in stream['url']]
+    # テンプレートに渡す
+    return render_template('video.html', first_url=first_url, last_url=last_url)
 
-# 最初のURLと最後のURLを取得
-if google_video_urls:
-    first_url = google_video_urls[0]
-    last_url = google_video_urls[-1]
+if __name__ == '__main__':
+    app.run(debug=True)
 
-    # 出力
-    print(f"${{1-url}}: {first_url}")
-    print(f"${{2-url}}: {last_url}")
-else:
-    print("googlevideo.comのURLは見つかりませんでした。")
