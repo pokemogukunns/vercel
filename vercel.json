@@ -12,4 +12,8 @@
       "dest": "/main.py"
     }
   ],
+  "env": {
+    "FLASK_ENV": "production"
+  }
 }
+
