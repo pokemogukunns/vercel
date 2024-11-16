@@ -2,18 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "main.py",
-      "use": "@vercel/python"
+      "src": "api/download.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/main.py"
+      "src": "/api/download",
+      "dest": "/api/download.js"
     }
   ],
   "env": {
-    "FLASK_ENV": "production"
+    "YT_DLP_PATH": "/path/to/yt-dlp",
+    "FFMPEG_PATH": "/path/to/ffmpeg"
   }
 }
-
