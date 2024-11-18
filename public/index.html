@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Stream URL Generator</title>
+</head>
+<body>
+  <h1>YouTube Stream URL Generator</h1>
+  <input type="text" id="videoUrl" placeholder="Enter YouTube video URL">
+  <button id="generateStreamUrlBtn">Generate Stream URL</button>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('generateStreamUrlBtn').addEventListener('click', async () => {
+      const url = document.getElementById('videoUrl').value;
+      if (!url) {
+        alert('Please enter a valid URL');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/getStreamUrl', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          // ストリームURLを表示
+          document.getElementById('result').innerHTML = `Stream URL: <a href="${data.streamUrl}" target="_blank">${data.streamUrl}</a>`;
+        } else {
+          document.getElementById('result').innerHTML = `Error: ${data.error}`;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('result').innerHTML = 'An error occurred';
+      }
+    });
+  </script>
+</body>
+</html>
